@@ -1,4 +1,3 @@
-// import { Image } from "@gluestack-ui/themed";
 import {
   Button,
   ButtonIcon,
