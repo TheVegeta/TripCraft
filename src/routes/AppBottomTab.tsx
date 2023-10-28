@@ -36,6 +36,7 @@ const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 const screenOptions: BottomTabNavigationOptions = {
   headerShown: false,
+  lazy: true,
 };
 
 const BottomTabList: FC<{
@@ -61,8 +62,8 @@ const BottomTabList: FC<{
     }, [index, currActive]);
 
     return (
-      <Pressable onPressIn={handlePress} flex={1}>
-        <VStack alignItems="center" flex={1}>
+      <Pressable onPressIn={handlePress}>
+        <VStack alignItems="center">
           <Icon
             as={Ionicons}
             // @ts-ignore
