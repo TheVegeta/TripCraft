@@ -1,7 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import {
   Box,
-  Divider,
   HStack,
   Icon,
   Pressable,
@@ -39,15 +38,15 @@ const screenOptions: BottomTabNavigationOptions = {
   headerShown: false,
 };
 
-const BottomTabList: FC<
-  {
-    iconName: string;
-    name: string;
-    index: number;
-    currActive: number;
-    setCurrActive: Dispatch<SetStateAction<number>>;
-  } & BottomTabBarProps
-> = fastMemo(
+const BottomTabList: FC<{
+  iconName: string;
+  name: string;
+  index: number;
+  currActive: number;
+  setCurrActive: Dispatch<SetStateAction<number>>;
+  navigation: BottomTabBarProps["navigation"];
+  state: BottomTabBarProps["state"];
+}> = fastMemo(
   ({ iconName, name, state, index, navigation, currActive, setCurrActive }) => {
     const [isActive, setIsActive] = useState(false);
 
@@ -83,8 +82,14 @@ const RenderTab: FC<BottomTabBarProps> = fastMemo((props) => {
   const [currActive, setCurrActive] = useState(0);
 
   return (
-    <Box bottom={0} position="absolute" width={"100%"} key={currActive}>
-      <Divider my="$1" />
+    <Box
+      bg="#FFF"
+      bottom={0}
+      position="absolute"
+      width={"100%"}
+      key={currActive}
+      padding="$2"
+    >
       <HStack
         alignContent="center"
         justifyContent="space-between"
@@ -98,7 +103,8 @@ const RenderTab: FC<BottomTabBarProps> = fastMemo((props) => {
           iconName="home"
           name="Home"
           setCurrActive={setCurrActive}
-          {...props}
+          navigation={props.navigation}
+          state={props.state}
         />
         <BottomTabList
           index={1}
@@ -106,7 +112,8 @@ const RenderTab: FC<BottomTabBarProps> = fastMemo((props) => {
           iconName="train"
           name="Trip"
           setCurrActive={setCurrActive}
-          {...props}
+          navigation={props.navigation}
+          state={props.state}
         />
         <BottomTabList
           index={2}
@@ -114,7 +121,8 @@ const RenderTab: FC<BottomTabBarProps> = fastMemo((props) => {
           iconName="compass"
           name="Guide"
           setCurrActive={setCurrActive}
-          {...props}
+          navigation={props.navigation}
+          state={props.state}
         />
         <BottomTabList
           index={3}
@@ -122,7 +130,8 @@ const RenderTab: FC<BottomTabBarProps> = fastMemo((props) => {
           iconName="person"
           name="Profile"
           setCurrActive={setCurrActive}
-          {...props}
+          navigation={props.navigation}
+          state={props.state}
         />
       </HStack>
     </Box>

@@ -1,5 +1,6 @@
 import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect } from "react";
+import { fastMemo } from "../utils";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -13,4 +14,4 @@ const AppLoading = () => {
   return <></>;
 };
 
-export default AppLoading;
+export default fastMemo(AppLoading);
