@@ -6,12 +6,15 @@ import React from "react";
 import Welcome from "../screen/Welcome";
 import Welcome1 from "../screen/Welcome1";
 import Welcome2 from "../screen/Welcome2";
+import { useAppStore } from "../store";
 import { animationDuration } from "../utils";
+import { AppBottomTab } from "./AppBottomTab";
 
 export type AppRoutesParamList = {
   welcome: undefined;
   welcome1: undefined;
   welcome2: undefined;
+  bottomTab: undefined;
 };
 
 const screenOptions: NativeStackNavigationOptions = {
@@ -23,11 +26,21 @@ const screenOptions: NativeStackNavigationOptions = {
 const Stack = createNativeStackNavigator<AppRoutesParamList>();
 
 const AppRoutes = () => {
+  const { isAuth } = useAppStore();
+
   return (
     <Stack.Navigator initialRouteName="welcome" screenOptions={screenOptions}>
-      <Stack.Screen name="welcome" component={Welcome} />
-      <Stack.Screen name="welcome1" component={Welcome1} />
-      <Stack.Screen name="welcome2" component={Welcome2} />
+      {isAuth === true ? (
+        <>
+          <Stack.Screen name="bottomTab" component={AppBottomTab} />
+        </>
+      ) : (
+        <>
+          <Stack.Screen name="welcome" component={Welcome} />
+          <Stack.Screen name="welcome1" component={Welcome1} />
+          <Stack.Screen name="welcome2" component={Welcome2} />
+        </>
+      )}
     </Stack.Navigator>
   );
 };

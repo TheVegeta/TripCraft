@@ -1,4 +1,3 @@
-// import { Image } from "@gluestack-ui/themed";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
 import StarterPage from "../component/StarterPage";
