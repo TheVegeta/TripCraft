@@ -5,6 +5,7 @@ import {
   Box,
   Button,
   ButtonIcon,
+  Divider,
   HStack,
   Heading,
   Image,
@@ -24,9 +25,10 @@ const CardBlock: FC<{
   source: ImageSourcePropType;
   heading: string;
   description: string;
-}> = ({ source, heading, description }) => {
+}> = fastMemo(({ source, heading, description }) => {
   return (
     <Box
+      bg="$white"
       maxWidth="$64"
       borderColor="$borderLight200"
       borderRadius="$lg"
@@ -59,7 +61,50 @@ const CardBlock: FC<{
       </VStack>
     </Box>
   );
-};
+});
+
+const RenderCard: FC<{
+  source: ImageSourcePropType;
+  title: string;
+  description: string;
+  price: string;
+}> = fastMemo(({ source, title, description, price }) => {
+  return (
+    <HStack flex={1}>
+      <VStack flex={1}>
+        <HStack
+          bg="$white"
+          flex={1}
+          borderColor="$borderLight200"
+          borderRadius="$lg"
+          borderWidth="$1"
+          mt="$4"
+          overflow="hidden"
+          sx={{
+            _dark: {
+              bg: "$backgroundDark900",
+              borderColor: "$borderDark800",
+            },
+          }}
+        >
+          <Box w="40%">
+            <Image h={150} w="100%" source={source} />
+          </Box>
+          <VStack w="60%" px="$6" pt="$4" pb="$6">
+            <Heading w="100%" size="sm">
+              {title}
+            </Heading>
+            <Text size="sm" flexWrap="wrap" flex={1}>
+              {description}
+            </Text>
+            <Divider my="$2" />
+            <Text size="sm">₹ {price}</Text>
+          </VStack>
+        </HStack>
+      </VStack>
+    </HStack>
+  );
+});
 
 const Home = () => {
   return (
@@ -89,6 +134,7 @@ const Home = () => {
             isInvalid={false}
             isReadOnly={false}
             alignItems="center"
+            borderRadius="$full"
           >
             <InputIcon
               as={Ionicons}
@@ -138,28 +184,22 @@ const Home = () => {
 
       <VStack mx={"$8"}>
         <HStack>
-          <Heading>Popular locations</Heading>
+          <Heading>Guides</Heading>
         </HStack>
-        <HStack
-          as={ScrollView}
-          // @ts-ignore
-          horizontal={true}
-          // @ts-ignore
-          showsVerticalScrollIndicator={false}
-          // @ts-ignore
-          showsHorizontalScrollIndicator={false}
-        >
-          <CardBlock
-            source={require("../assets/bandra-worli-sea.jpg")}
-            heading="Bandra-Worli Sea Link"
-            description="It has taken around 10 years to get constructed, now stands tall symbolizing the strength of the city and the country."
-          />
-          <CardBlock
-            source={require("../assets/marine-drive.jpg")}
-            heading="Marine Drive"
-            description="A sweeping, seemingly endless seafront, that curves around Mumbai edging the Arabian Sea."
-          />
-        </HStack>
+
+        <RenderCard
+          title="Kyoto"
+          description="Kyoto is a mesmerizing city that seamlessly..."
+          source={require("../assets/Kyoto.jpg")}
+          price="125000"
+        />
+
+        <RenderCard
+          title="Mumbai"
+          description="Mumbai, the bustling city that never sleeps."
+          source={require("../assets/marine-drive.jpg")}
+          price="6580"
+        />
       </VStack>
     </>
   );
