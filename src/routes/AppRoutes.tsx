@@ -3,6 +3,8 @@ import {
   NativeStackNavigationOptions,
 } from "@react-navigation/native-stack";
 import React from "react";
+import TripDetails from "../screen/TripDetails";
+import TripPlan from "../screen/TripPlan";
 import Welcome from "../screen/Welcome";
 import Welcome1 from "../screen/Welcome1";
 import Welcome2 from "../screen/Welcome2";
@@ -15,6 +17,8 @@ export type AppRoutesParamList = {
   welcome1: undefined;
   welcome2: undefined;
   bottomTab: undefined;
+  tripdetails: undefined;
+  tripdeplan: undefined;
 };
 
 const screenOptions: NativeStackNavigationOptions = {
@@ -33,6 +37,8 @@ const AppRoutes = () => {
       {isAuth === true ? (
         <>
           <Stack.Screen name="bottomTab" component={AppBottomTab} />
+          <Stack.Screen name="tripdetails" component={TripDetails} />
+          <Stack.Screen name="tripdeplan" component={TripPlan} />
         </>
       ) : (
         <>

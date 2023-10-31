@@ -12,13 +12,17 @@ import {
   Input,
   InputField,
   InputIcon,
+  Pressable,
   ScrollView,
   Text,
   VStack,
+  View,
 } from "@gluestack-ui/themed";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React, { FC } from "react";
 import { ImageSourcePropType } from "react-native";
 import withLayout from "../provider/withLayout";
+import { AppRoutesParamList } from "../routes/AppRoutes";
 import { fastMemo } from "../utils";
 
 const CardBlock: FC<{
@@ -69,40 +73,48 @@ const RenderCard: FC<{
   description: string;
   price: string;
 }> = fastMemo(({ source, title, description, price }) => {
+  const { navigate } = useNavigation<NavigationProp<AppRoutesParamList>>();
+
+  const handleNavigate = () => {
+    navigate("tripdetails");
+  };
+
   return (
-    <HStack flex={1}>
-      <VStack flex={1}>
-        <HStack
-          bg="$white"
-          flex={1}
-          borderColor="$borderLight200"
-          borderRadius="$lg"
-          borderWidth="$1"
-          mt="$4"
-          overflow="hidden"
-          sx={{
-            _dark: {
-              bg: "$backgroundDark900",
-              borderColor: "$borderDark800",
-            },
-          }}
-        >
-          <Box w="40%">
-            <Image h={150} w="100%" source={source} />
-          </Box>
-          <VStack w="60%" px="$6" pt="$4" pb="$6">
-            <Heading w="100%" size="sm">
-              {title}
-            </Heading>
-            <Text size="sm" flexWrap="wrap" flex={1}>
-              {description}
-            </Text>
-            <Divider my="$2" />
-            <Text size="sm">₹ {price}</Text>
-          </VStack>
-        </HStack>
-      </VStack>
-    </HStack>
+    <Pressable onPressIn={handleNavigate}>
+      <HStack flex={1}>
+        <VStack flex={1}>
+          <HStack
+            bg="$white"
+            flex={1}
+            borderColor="$borderLight200"
+            borderRadius="$lg"
+            borderWidth="$1"
+            mt="$4"
+            overflow="hidden"
+            sx={{
+              _dark: {
+                bg: "$backgroundDark900",
+                borderColor: "$borderDark800",
+              },
+            }}
+          >
+            <Box w="40%">
+              <Image h={150} w="100%" source={source} />
+            </Box>
+            <VStack w="60%" px="$6" pt="$4" pb="$6">
+              <Heading w="100%" size="sm">
+                {title}
+              </Heading>
+              <Text size="sm" flexWrap="wrap" flex={1}>
+                {description}
+              </Text>
+              <Divider my="$2" />
+              <Text size="sm">₹ {price}</Text>
+            </VStack>
+          </HStack>
+        </VStack>
+      </HStack>
+    </Pressable>
   );
 });
 
@@ -201,6 +213,8 @@ const Home = () => {
           price="6580"
         />
       </VStack>
+
+      <View mb="$20"></View>
     </>
   );
 };
