@@ -9,6 +9,7 @@ const withLayout = (Component: FC) => (props: any) => {
       paddingTop={StatusBar.currentHeight}
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
+      mb="$20"
     >
       <Component {...props} />
     </ScrollView>

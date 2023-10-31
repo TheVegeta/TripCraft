@@ -7,7 +7,6 @@ const App = () => {
   return (
     <>
       <StatusBar style="dark" />
-
       <AppProvider>
         <AppRoutes />
       </AppProvider>
