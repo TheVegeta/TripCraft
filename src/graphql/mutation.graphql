@@ -1,0 +1,13 @@
+mutation AuthMobileUser($options: IGoogleAuthInput!) {
+  authMobileUser(options: $options) {
+    success
+    msg
+    jwt
+    user {
+      _id
+      name
+      email
+      picture
+    }
+  }
+}

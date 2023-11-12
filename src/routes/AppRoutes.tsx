@@ -3,6 +3,7 @@ import {
   NativeStackNavigationOptions,
 } from "@react-navigation/native-stack";
 import React from "react";
+import LoginWithGoogle from "../screen/auth/LoginWithGoogle";
 import TripDetails from "../screen/TripDetails";
 import TripPlan from "../screen/TripPlan";
 import Welcome from "../screen/Welcome";
@@ -19,6 +20,7 @@ export type AppRoutesParamList = {
   bottomTab: undefined;
   tripdetails: undefined;
   tripdeplan: undefined;
+  googleAuth: { authUrl: string };
 };
 
 const screenOptions: NativeStackNavigationOptions = {
@@ -45,6 +47,7 @@ const AppRoutes = () => {
           <Stack.Screen name="welcome" component={Welcome} />
           <Stack.Screen name="welcome1" component={Welcome1} />
           <Stack.Screen name="welcome2" component={Welcome2} />
+          <Stack.Screen name="googleAuth" component={LoginWithGoogle} />
         </>
       )}
     </Stack.Navigator>

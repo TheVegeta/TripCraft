@@ -4,14 +4,40 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 interface IAppState {
   isAuth: boolean;
-  toggleAuth: () => void;
+  user: {
+    _id: string;
+    email: string;
+    name: string;
+    picture: string;
+    jwt: string;
+  };
+  setAuth: (arg0: {
+    _id: string;
+    email: string;
+    name: string;
+    picture: string;
+    jwt: string;
+  }) => void;
+  removeAuth: () => void;
 }
 
 const useAppStore = create<IAppState>()(
   persist(
     (set) => ({
       isAuth: false,
-      toggleAuth: () => set((state) => ({ isAuth: !state.isAuth })),
+      user: {
+        _id: "",
+        email: "",
+        jwt: "",
+        name: "",
+        picture: "",
+      },
+      setAuth: (arg0) => set((state) => ({ isAuth: true, user: arg0 })),
+      removeAuth: () =>
+        set((state) => ({
+          isAuth: false,
+          user: { _id: "", email: "", jwt: "", name: "", picture: "" },
+        })),
     }),
     {
       name: "TripCraft",

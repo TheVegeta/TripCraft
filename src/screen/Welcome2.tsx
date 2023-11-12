@@ -1,14 +1,16 @@
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
 import StarterPage from "../component/StarterPage";
 import withLayout from "../provider/withLayout";
-import { useAppStore } from "../store";
+import { AppRoutesParamList } from "../routes/AppRoutes";
 import { fastMemo } from "../utils";
+import { API_URL } from "../utils/constant";
 
 const Welcome2 = () => {
-  const { toggleAuth } = useAppStore();
+  const { navigate } = useNavigation<NavigationProp<AppRoutesParamList>>();
 
   const handleRedirect = () => {
-    toggleAuth();
+    navigate("googleAuth", { authUrl: API_URL + "/auth/google" });
   };
 
   return (
